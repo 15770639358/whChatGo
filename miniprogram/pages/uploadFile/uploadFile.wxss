@@ -1,0 +1,52 @@
+/* miniprogram/pages/uploadFile/uploadFile.wxss */
+.pathModel {
+  width: 700rpx;
+  height: 300rpx;
+}
+
+.pathInput {
+  border: 1px #cacaca solid;
+  width: 500rpx;
+}
+
+.photo {
+  width: 750rpx;
+  display: flex;
+  flex-wrap: wrap;align-items: center;
+}
+
+.pic {
+  margin-left: 15rpx;
+  width: 230rpx;
+  height: 230rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  background-color: #fff;
+  margin-top: 10rpx;
+  margin-bottom: 20rpx;
+}
+.tarBar{
+  display: flex;
+  align-items: center;
+  height: 50rpx;
+  width: 750rpx;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+}
+
+.getFolder {
+  width: 50rpx;
+  flex: 1;
+  text-align: center;
+  border: 1px #cacaca solid;
+}
+
+.getFile {
+  width: 50rpx;
+  flex: 1;
+  text-align: center;
+  border: 1px #cacaca solid;
+}

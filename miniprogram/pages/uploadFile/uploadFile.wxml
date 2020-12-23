@@ -1,0 +1,46 @@
+<!--miniprogram/pages/uploadFile/uploadFile.wxml-->
+<view class="content">
+<scroll-view scroll-y style="width:750rpx;height:1300rpx;" bindscrolltolower = "getNextPhoto">
+		<view class='photo'>
+		<view class="pic" wx:for="{{photo}}" wx:key="index">
+			<van-image lazy-load use-loading-slot src="{{item}}" width='230rpx' fit="widthFix">
+				<van-loading slot="loading" type="spinner" size="20" vertical>加载中...</van-loading>
+			</van-image>
+			<!-- <image src="{{item}}" style="width:230rpx;" mode="widthFix"></image> -->
+		</view>
+	</view>
+
+	<view class='photo'>
+		<view class="pic" wx:for="{{filePath}}" wx:key="index">
+			<van-image lazy-load use-loading-slot src="{{item.path}}" width='230rpx' fit="widthFix">
+				<van-loading slot="loading" type="spinner" size="20" vertical>上传中...</van-loading>
+			</van-image>
+			<!-- <image src="{{item}}" style="width:230rpx;" mode="widthFix"></image> -->
+		</view>
+	</view>
+
+	<view wx:for="{{showFolders}}" wx:key="index" data-id="{{item.id}}" data-path="{{item.path}}" bindtap="getNextFolders">{{item.path}}</view>
+</scroll-view>
+
+
+	<view class='tarBar'>
+		<view bindtap="isShow" class="getFolder">新建文件夹</view>
+		<view bindtap="uploadFile" class="getFile">上传文件</view>
+	</view>
+
+	<!-- <view wx:if = "{{showUploadButton}}">
+    <button bindtap="uploadFile" style="background:red;">上传文件</button>
+    <image src="{{filePath}}"></image>
+  </view> -->
+
+	<!-- <button bindtap="isShow">新建文件夹</button> -->
+
+	<!-- setFolser -->
+
+	<van-popup show="{{ show }}" bind:close="onClose" closeable>
+		<view class='pathModel' style="padding:10rpx;20rpx;">
+			<input class='pathInput' value="{{addPath}}" bindinput="onChange"></input>
+			<button bindtap="setFolser">确定</button>
+		</view>
+	</van-popup>
+</view>

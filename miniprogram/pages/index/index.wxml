@@ -1,0 +1,6 @@
+<!--index.wxml-->
+<view class="container">
+<view style="height:50rpx;"></view>
+<button bindtap="uploadfile">上传文件</button>
+<image src="{{filePath}}"></image>
+</view>
