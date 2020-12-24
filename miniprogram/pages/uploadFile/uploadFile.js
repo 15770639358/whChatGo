@@ -58,7 +58,7 @@ Page({
 
   //触底更新
   async getNextPhoto() {
-    if(this.data.getNextPhoto) {
+    if (this.data.getNextPhoto) {
       await hander(this.getNextPhotoImpl)
     }
   },
@@ -66,11 +66,13 @@ Page({
   //触底更新实现
   async getNextPhotoImpl() {
     let total = await Serv.countResult(this.data.cloudPathId)
-    if((this.data.photo.length + this.data.filePath.length) < total) {
+    if ((this.data.photo.length + this.data.filePath.length) < total) {
       // console.log('aaa')
       // this.setData({filePath: []})
       let page = this.data.page + 1
-      this.setData({page})
+      this.setData({
+        page
+      })
       let photos = await this.getPhoto()
       let photoPath = []
       photos.forEach(value => {
@@ -83,12 +85,17 @@ Page({
       let nowPhoto = this.data.nowPhoto
       oldPhoto = [...oldPhoto, ...nowPhoto]
       let photo = [...oldPhoto, ...photoPath]
-      this.setData({photo, oldPhoto, nowPhoto: photoPath})
+      this.setData({
+        photo,
+        oldPhoto,
+        nowPhoto: photoPath
+      })
     }
   },
 
   //获取下一级目录
   async getNextFolders(e) {
+    this.setData({page: 0})
     let id = e.target.dataset.id
     let cloudPath = e.target.dataset.path
     let showFolders = await Serv.getFolders(id)
@@ -98,59 +105,83 @@ Page({
       cloudPathId: id
     })
     //将本目录下的路径信息获取，存放在列表下
-    let {cloudPathList, cloudPathIdList} = this.data
+    let {
+      cloudPathList,
+      cloudPathIdList
+    } = this.data
     cloudPathIdList.push(this.data.cloudPathId)
     cloudPathList.push(this.data.cloudPath)
-    this.setData({cloudPathIdList,cloudPathList})
-
-    let filePath = []
-    let photos = await this.getPhoto()
-    let photoPath = []
-    photos.forEach(value => {
-      photoPath.push(value.fileid)
-    })
-    let oldPhoto = this.data.oldPhoto
-    let photo = [...oldPhoto, ...photoPath]
     this.setData({
-      filePath,
-      nowPhoto: photoPath,
-      photo
+      cloudPathIdList,
+      cloudPathList
     })
-  },
 
-  //获取上一级目录
-  async getPreFolders() {
-    let {cloudPathList, cloudPathIdList} = this.data
-    cloudPathList.pop()
-    cloudPathIdList.pop()
-
-    let cloudPathId = cloudPathIdList[cloudPathIdList.length - 1]
-    let cloudPath = cloudPathList[cloudPathList.length - 1]
-
-    this.setData({cloudPathList, cloudPathIdList, cloudPathId, cloudPath})
-
-    let showFolders = await Serv.getFolders(cloudPathId)
+    let filePath = []
     let photos = await this.getPhoto()
     let photoPath = []
-    let filePath = []
     photos.forEach(value => {
       photoPath.push(value.fileid)
     })
-    let oldPhoto = this.data.oldPhoto
+    let oldPhoto = []
     let photo = [...oldPhoto, ...photoPath]
     this.setData({
       filePath,
       nowPhoto: photoPath,
       photo,
-      showFolders
+      oldPhoto
     })
+  },
+
+  //获取上一级目录
+  async getPreFolders() {
+    if (this.data.cloudPathIdList.length > 1) {
+      this.setData({page: 0})
+      let {
+        cloudPathList,
+        cloudPathIdList
+      } = this.data
+      cloudPathList.pop()
+      cloudPathIdList.pop()
+
+      let cloudPathId = cloudPathIdList[cloudPathIdList.length - 1]
+      let cloudPath = cloudPathList[cloudPathList.length - 1]
+
+      this.setData({
+        cloudPathList,
+        cloudPathIdList,
+        cloudPathId,
+        cloudPath
+      })
+
+      let showFolders = await Serv.getFolders(cloudPathId)
+      let photos = await this.getPhoto()
+      let photoPath = []
+      let filePath = []
+      photos.forEach(value => {
+        photoPath.push(value.fileid)
+      })
+      let oldPhoto = []
+      let photo = [...oldPhoto, ...photoPath]
+      this.setData({
+        filePath,
+        nowPhoto: photoPath,
+        photo,
+        showFolders,
+        oldPhoto
+      })
+    }
+
   },
 
   //上传文件
   async uploadFile() {
     let _this = this
-    this.setData({getNextPhoto: false})
-    _this.setData({filePath: []})
+    this.setData({
+      getNextPhoto: false
+    })
+    _this.setData({
+      filePath: []
+    })
     let photos = await _this.getPhoto()
     let photoPath = []
     photos.forEach(value => {
@@ -163,9 +194,14 @@ Page({
     let oldPhoto = this.data.oldPhoto
     let photo = [...oldPhoto, ...photoPath]
     // console.log(photoPath)
-    _this.setData({photo,nowPhoto: photoPath})
+    _this.setData({
+      photo,
+      nowPhoto: photoPath
+    })
     await this.getNextPhotoImpl()
-    _this.setData({getNextPhoto:true})
+    _this.setData({
+      getNextPhoto: true
+    })
     wx.chooseImage({
       count: 10, //可选择最大文件数 （最多100）
       async success(res) {
@@ -194,8 +230,13 @@ Page({
             })
           } else {
             let filePath = _this.data.filePath
-            filePath[i] = {path: path, successUpload:true}
-            _this.setData({filePath})
+            filePath[i] = {
+              path: path,
+              successUpload: true
+            }
+            _this.setData({
+              filePath
+            })
           }
         })
       },
@@ -250,16 +291,16 @@ Page({
 
 
   //防抖
-  throttle(delay) {            
-    let prev = Date.now();            
-    　　return function(func) {                
-    　　　　var context = this;                
-    　　　　var args = arguments;                
-    　　　　var now = Date.now();                
-    　　　　if (now - prev >= delay) {                    
-    　　　　　　func.apply(context, args);                    
-    　　　　　　prev = Date.now();                
-    　　　　}            
-    　　}        
-    }  
+  throttle(delay) {
+    let prev = Date.now();
+    return function (func) {
+      var context = this;
+      var args = arguments;
+      var now = Date.now();
+      if (now - prev >= delay) {
+        func.apply(context, args);
+        prev = Date.now();
+      }
+    }
+  }
 })
