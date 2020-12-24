@@ -1,0 +1,5 @@
+<view class="container">
+<image class="img-one" src="../../../resources/image/fileNavigation/file-folder.png"></image>
+<view class="conter">{{fileName}}</view>
+<image class="img-two" src="../../../resources/image/fileNavigation/ArrowHead.png"></image>
+</view>

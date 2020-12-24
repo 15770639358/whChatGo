@@ -1,0 +1,21 @@
+.container{
+  display: flex;
+  align-items: center;
+  height: 80rpx;
+  border-radius: 8rpx;
+  background-color: #151413;
+  padding: 0rpx 10rpx 0rpx 20rpx;
+}
+.img-one{
+  width: 60rpx;
+  height: 60rpx;
+  margin-right: 20rpx;
+}
+.conter{
+  flex: 1;
+  color:#999896;
+}
+.img-two{
+  width: 50rpx;
+  height: 50rpx;
+}
