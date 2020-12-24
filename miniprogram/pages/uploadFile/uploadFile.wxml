@@ -1,5 +1,6 @@
 <!--miniprogram/pages/uploadFile/uploadFile.wxml-->
 <view class="content">
+<view style="" bindtap="getPreFolders">上一级目录</view>
 <scroll-view scroll-y style="width:750rpx;height:1300rpx;" bindscrolltolower = "getNextPhoto">
 		<view class='photo'>
 		<view class="pic" wx:for="{{photo}}" wx:key="index">

@@ -10,6 +10,8 @@ Page({
     filePath: [], //文件本地临时路径,
     cloudPath: '', //文件上传路径
     cloudPathId: '', //文件上传路径的id
+    cloudPathList: [], //文件上传路径列表
+    cloudPathIdList: [], //文件上传路径的id列表
     show: false,
     addPath: '', //需新建的path folder,
     photo: [], //已有的photo，展示
@@ -44,7 +46,8 @@ Page({
       showFolders.push(folder)
     })
     this.setData({
-      showFolders
+      showFolders,
+      cloudPathIdList: ['']
     })
   },
 
@@ -94,6 +97,13 @@ Page({
       cloudPath,
       cloudPathId: id
     })
+    //将本目录下的路径信息获取，存放在列表下
+    let {cloudPathList, cloudPathIdList} = this.data
+    cloudPathIdList.push(this.data.cloudPathId)
+    cloudPathList.push(this.data.cloudPath)
+    this.setData({cloudPathIdList,cloudPathList})
+
+    let filePath = []
     let photos = await this.getPhoto()
     let photoPath = []
     photos.forEach(value => {
@@ -102,8 +112,37 @@ Page({
     let oldPhoto = this.data.oldPhoto
     let photo = [...oldPhoto, ...photoPath]
     this.setData({
+      filePath,
       nowPhoto: photoPath,
       photo
+    })
+  },
+
+  //获取上一级目录
+  async getPreFolders() {
+    let {cloudPathList, cloudPathIdList} = this.data
+    cloudPathList.pop()
+    cloudPathIdList.pop()
+
+    let cloudPathId = cloudPathIdList[cloudPathIdList.length - 1]
+    let cloudPath = cloudPathList[cloudPathList.length - 1]
+
+    this.setData({cloudPathList, cloudPathIdList, cloudPathId, cloudPath})
+
+    let showFolders = await Serv.getFolders(cloudPathId)
+    let photos = await this.getPhoto()
+    let photoPath = []
+    let filePath = []
+    photos.forEach(value => {
+      photoPath.push(value.fileid)
+    })
+    let oldPhoto = this.data.oldPhoto
+    let photo = [...oldPhoto, ...photoPath]
+    this.setData({
+      filePath,
+      nowPhoto: photoPath,
+      photo,
+      showFolders
     })
   },
 
