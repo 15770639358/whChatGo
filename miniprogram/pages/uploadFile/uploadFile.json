@@ -3,6 +3,7 @@
      "van-popup": "@vant/weapp/popup/index",
      "van-image": "@vant/weapp/image/index",
      "van-loading": "@vant/weapp/loading/index",
-     "tarbar": "../../interface/components/tarbar/tarbar"
+     "tarbar": "../../interface/components/tarbar/tarbar",
+     "fileNavigation": "../../interface/components/fileNavigation/fileNavigation"
   }
 }

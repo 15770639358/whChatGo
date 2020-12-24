@@ -20,7 +20,9 @@
 		</view>
 	</view>
 
-	<view wx:for="{{showFolders}}" wx:key="index" data-id="{{item.id}}" data-path="{{item.path}}" bindtap="getNextFolders">{{item.path}}</view>
+	<view wx:for="{{showFolders}}" wx:key="index"  > 
+		<fileNavigation bindgetNextFolders = 'getNextFolders' fileName = '{{item.path}}' data-id="{{item.id}}" data-path="{{item.path}}"></fileNavigation>
+	</view>
 </scroll-view>
 
 
