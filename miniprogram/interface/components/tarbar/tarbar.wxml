@@ -1,0 +1,12 @@
+
+
+<!-- 自定义 tabbar -->
+<view class="nav-tabs">
+  <view class="tab-list {{currentTab == idx ? 'active' : 'default' }}"
+        wx:for="{{items}}" wx:key="prototype"
+        wx:for-index="idx" wx:for-item="item" data-current="{{idx}}" bindtap="changePage">
+    <text class="tab-text" wx:for-index="idx" data-current="{{idx}}">{{item.text}}</text>
+    <image class="iconPath" wx:for-index="idx" data-current="{{idx}}" src="{{item.iconPath }}"></image>
+  </view>
+</view>
+

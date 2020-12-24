@@ -1,0 +1,83 @@
+/**index.wxss**/
+/* @import "/resources/css/image.wxss"; */
+page {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.navbar-wrap{
+  background: none !important;
+}
+.navbar-status {
+  background: #FCD180 !important;
+}
+
+.nav-tabs {
+  width: 100%;
+  display: flex;
+  position: fixed;
+  bottom: 0;
+  z-index: 99;
+  height: 98rpx;
+  background: #242321;
+  box-shadow: 0 -8rpx 16rpx 0 rgba(21,20,19,0.8);
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+.tab-list {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column-reverse;
+  height: 98rpx;
+}
+
+.tab-text {
+  font-size: 20rpx;
+  line-height: 35rpx;
+  color: #656563;
+}
+
+.iconPath {
+  width:40rpx;
+  height: 40rpx;
+}
+
+.tab-content {
+  flex: 1;
+}
+
+.default {
+  line-height: 75rpx;
+  text-align: center;
+  flex: 1;
+  /* border-bottom: 1px solid #eee; */
+  color: #656563;
+  font-weight: bold;
+  font-size: 20rpx;
+}
+.text-selected{
+  color: #DBAA66 !important;
+}
+.active {
+  font-size: 20rpx;
+  font-family: PingFangSC-Medium, PingFang SC;
+  font-weight: 500;
+  color: #DBAA66;
+
+  line-height: 75rpx;
+  text-align: center;
+  flex: 1;
+  /* border-bottom: 1px solid red; */
+}
+
+.show {
+  display: block;
+  flex: 1;
+}
+
+.hidden {
+  display: none;
+  flex: 1;
+}

@@ -162,7 +162,7 @@ Page({
     // console.log(photoPath)
     let oldPhoto = this.data.oldPhoto
     let photo = [...oldPhoto, ...photoPath]
-    console.log(photoPath)
+    // console.log(photoPath)
     _this.setData({photo,nowPhoto: photoPath})
     await this.getNextPhotoImpl()
     _this.setData({getNextPhoto:true})

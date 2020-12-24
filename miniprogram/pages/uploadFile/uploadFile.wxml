@@ -24,10 +24,12 @@
 </scroll-view>
 
 
-	<view class='tarBar'>
+	<!-- <view class='tarBar'>
 		<view bindtap="isShow" class="getFolder">新建文件夹</view>
 		<view bindtap="uploadFile" class="getFile">上传文件</view>
-	</view>
+	</view> -->
+
+	<tarbar bindgetFolder = "isShow" bindgetFile = "uploadFile"></tarbar>
 
 	<!-- <view wx:if = "{{showUploadButton}}">
     <button bindtap="uploadFile" style="background:red;">上传文件</button>
